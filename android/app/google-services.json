@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "589757872659",
+    "firebase_url": "https://reminder-de82b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "reminder-de82b",
+    "storage_bucket": "reminder-de82b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589757872659:android:f858a551d6b29738ee1de6",
+        "android_client_info": {
+          "package_name": "com.example.sooryx.reminder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcmTy4JdJBEeAuCuRrekOKOJG0oGAqGJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,13 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reminder/screens/add_reminder.dart';
 import 'package:reminder/screens/homepage.dart';
 import 'package:reminder/screens/onboarding_screen.dart';
-import 'package:timezone/data/latest.dart' as tzdata;
-import 'package:timezone/timezone.dart' as tz;
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  tzdata.initializeTimeZones();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -43,6 +40,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    ///ScreenUtil is used to make the responsive
+
     return ScreenUtilInit(
         designSize: const Size(392.72727272727275, 850.9090909090909),
         minTextAdapt: true,

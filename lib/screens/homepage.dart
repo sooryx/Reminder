@@ -20,6 +20,8 @@ class _HomepageState extends State<Homepage> {
   String minute = '';
   String amPm = '';
 
+  ///Added details in [add_reminder.dart] page is fetched from firebase
+
   Future<void> _fetchUserData() async {
     try {
       // Fetch data from Firestore
@@ -54,6 +56,8 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
+///User can delete their reminders from database
+
   void deleteReminder(String documentId) async {
     try {
       await FirebaseFirestore.instance
@@ -85,6 +89,9 @@ class _HomepageState extends State<Homepage> {
       body: Column(
         children: [
           Expanded(
+
+            ///Fetched data is displayed using streamBuilder
+
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('User Reminder')
@@ -112,6 +119,7 @@ class _HomepageState extends State<Homepage> {
                   } else {
                     return Center(
                         child:
+                            ///Circular progress indicator
                             Container(
                                 padding: EdgeInsets.all(20.dg),
                                 child: CircularProgressIndicator()));

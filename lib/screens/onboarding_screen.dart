@@ -16,12 +16,14 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final TextEditingController _nameController = TextEditingController();
 
+  ///Function to store the name
   _storename() async {
     await FirebaseFirestore.instance
         .collection('Users')
         .add({'u_name': _nameController.text});
   }
 
+  ///No credentials is taken, just letting the user login anonymously by calling the function
   Future<void> signInAnonymously() async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
@@ -33,11 +35,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
+  ///To call the both functions, skipping and storing the database
   void _onClick() async {
     try {
       await _storename();
       await signInAnonymously();
       Navigator.pushNamed(context, '/home');
+      print('Success');
     } catch (e) {
       print('Error in _onClick: $e');
       // Handle the error as needed
@@ -55,6 +59,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+            ///Animated json file is added using Lottie package
+
             SizedBox(
                 height: 500.h,
                 width: 200.w,
@@ -84,6 +91,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             RoundButton(
               icon: const Icon(Icons.arrow_forward_ios_rounded),
               onPressed: () {
+                ///The name entered is added to the Firestore database
                 _onClick();
               },
             )

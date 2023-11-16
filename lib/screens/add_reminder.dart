@@ -20,6 +20,8 @@ class _AddReminderState extends State<AddReminder> {
   TimeOfDay time = const TimeOfDay(hour: 10, minute: 30);
   User? user = FirebaseAuth.instance.currentUser;
   late tz.Location _local = tz.getLocation('Asia/Kolkata');
+
+  ///Initialized the notification plugin
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   FlutterLocalNotificationsPlugin();
 
@@ -36,6 +38,7 @@ class _AddReminderState extends State<AddReminder> {
     'Go to sleep',
   ];
 
+///Storing the data chosen into the firebase and scheduling the notification from the selected data
   _storeReminder() async {
     try {
       String? amPm = time?.period == DayPeriod.am ? 'AM' : 'PM';
@@ -57,6 +60,8 @@ class _AddReminderState extends State<AddReminder> {
             .doc(user!.uid)
             .collection("Reminders")
             .add(reminderData);
+
+        ///Schedule notification is called here
 try {
   await scheduleNotification(
     selectedActivity,
@@ -78,9 +83,11 @@ try {
     }
   }
 
+  ///Scheduling the notifications using [flutter_local_notifications]
+
   Future<void> scheduleNotification(
       String task, String day, int hour, int minute) async {
-    var androidDetails = AndroidNotificationDetails(
+    var androidDetails = const AndroidNotificationDetails(
       'channel_id',
       'Channel Name',
       channelDescription: 'Channel Description',
@@ -109,21 +116,9 @@ try {
     );
   }
 
-  Future<void> initNotifications() async {
-    // Initialize the plugin here
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-    const AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('app_icon');
-    final InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-    );
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  }
 
   @override
   void initState() {
-    initNotifications();
     super.initState();
   }
   @override
@@ -138,6 +133,9 @@ try {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+            /// Button to choose activity
+
             Container(
               padding: EdgeInsets.all(10.dg),
               decoration: BoxDecoration(
@@ -170,6 +168,8 @@ try {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                /// Button to choose day for the reminder
+
                 Container(
                   width: 200.w,
                   padding: EdgeInsets.all(10.dg),
@@ -208,6 +208,9 @@ try {
                         .toList(),
                   ),
                 ),
+
+                /// Button to choose time for the reminder
+
                 GestureDetector(
                   onTap: () async {
                     TimeOfDay? newTime =
@@ -256,6 +259,7 @@ try {
     );
   }
 
+  ///Function to convert the chosen time into string before uploading to firebase
   String formatTime(TimeOfDay time) {
     // Determine if it's AM or PM
     String period = time.period == DayPeriod.am ? 'AM' : 'PM';

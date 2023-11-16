@@ -11,6 +11,7 @@ To use the application, follow these steps:
 1. Clone the repository to your local machine.
 2. Open the project in a Flutter-compatible IDE.
 3. Run the application on an emulator or a physical device.
+4. app-release.apk file is also in the main directory.
 
 Choose the day of the week, set the time, and select the activity from the dropdown lists.
 

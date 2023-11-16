@@ -7,6 +7,9 @@ import 'package:reminder/screens/homepage.dart';
 import 'package:reminder/screens/onboarding_screen.dart';
 import 'firebase_options.dart';
 
+
+///APK file is also in the main directory[Reminder/app-release.apk].
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
